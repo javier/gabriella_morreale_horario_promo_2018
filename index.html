@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horarios de la promo 2018</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="home">
+  <h1>Horarios</h1>
+  <p class="sub">Promo 2018. Elige un curso, añade tus extraescolares e imprímelo.</p>
+  <ul class="years" id="years"></ul>
+</main>
+<script src="common.js"></script>
+<script>
+(async () => {
+  const ul = document.getElementById('years');
+  try {
+    const acts = new URLSearchParams(location.search).get('acts');
+    const [years, colours] = await Promise.all([loadJSON('data/years.json'), loadJSON('data/subjects.json')]);
+    for (const y of years) {
+      const li = el('li');
+      const a = el('a', 'year-link');
+      a.href = `year.html?y=${y.id}` + (acts ? `&acts=${acts}` : '');
+      const left = el('div');
+      left.append(el('div', 'y', y.id), el('div', 'c', `Horario ${y.clase}`));
+      const thumb = el('div', 'thumb');
+      thumb.setAttribute('aria-hidden', 'true');
+      a.append(left, thumb);
+      li.append(a); ul.append(li);
+      // mini week: one bar per lesson, coloured like the timetable
+      loadJSON(`data/${y.id}/timetable.json`).then(tt => {
+        for (const row of tt.rows) for (let i = 0; i < 5; i++) {
+          const key = row.type === 'recreo' ? 'RECREO' : row.type === 'comedor' ? 'COMEDOR' : subjectKey(row.cells[i]);
+          const s = el('span'); s.style.background = colours[key] || '#eee'; thumb.append(s);
+        }
+      }).catch(() => {});
+    }
+  } catch (e) {
+    ul.replaceWith(el('p', 'err', e.message));
+  }
+})();
+</script>
+</body>
+</html>

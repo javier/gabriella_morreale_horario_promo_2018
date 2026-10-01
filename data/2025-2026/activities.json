@@ -1,0 +1,473 @@
+[
+  {
+    "id": "predeporte",
+    "name": "PREDEPORTE",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "EDUCACIÓN FÍSICA",
+    "school": true
+  },
+  {
+    "id": "baile-moderno",
+    "name": "BAILE MODERNO",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "MÚSICA",
+    "school": true
+  },
+  {
+    "id": "sevillanas-primaria",
+    "name": "SEVILLANAS PRIMARIA",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "MÚSICA",
+    "school": true,
+    "cursos": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "sevillanas-infantil",
+    "name": "SEVILLANAS INFANTIL",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "MÚSICA",
+    "school": true,
+    "cursos": [
+      "INF"
+    ]
+  },
+  {
+    "id": "storytellers",
+    "name": "STORYTELLERS",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "INGLÉS",
+    "school": true
+  },
+  {
+    "id": "bellas-artes-1-3",
+    "name": "BELLAS ARTES 1º-3º",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "ARTS",
+    "school": true,
+    "cursos": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": "bellas-artes-4-6",
+    "name": "BELLAS ARTES 4º-6º",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "ARTS",
+    "school": true,
+    "cursos": [
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "guitarra",
+    "name": "GUITARRA",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "MÚSICA",
+    "school": true
+  },
+  {
+    "id": "piano-lx",
+    "name": "PIANO",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "MÚSICA",
+    "school": true
+  },
+  {
+    "id": "zumba",
+    "name": "ZUMBA",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "19:00",
+    "end": "20:00",
+    "address": "C/ Nogal",
+    "category": "EDUCACIÓN FÍSICA",
+    "school": true
+  },
+  {
+    "id": "predeporte-2023",
+    "name": "PREDEPORTE 2023",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "EDUCACIÓN FÍSICA",
+    "school": true,
+    "cursos": [
+      "INF"
+    ]
+  },
+  {
+    "id": "predeporte-2022-2021",
+    "name": "PREDEPORTE 2022/2021",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "EDUCACIÓN FÍSICA",
+    "school": true,
+    "cursos": [
+      "INF"
+    ]
+  },
+  {
+    "id": "sevillanas-infantil-1-2",
+    "name": "SEVILLANAS INFANTIL/1º-2º",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "MÚSICA",
+    "school": true,
+    "cursos": [
+      "INF",
+      1,
+      2
+    ]
+  },
+  {
+    "id": "ingles-3-4-anos",
+    "name": "INGLÉS 3/4 AÑOS",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "INGLÉS",
+    "school": true,
+    "cursos": [
+      "INF"
+    ]
+  },
+  {
+    "id": "ingles-1-2",
+    "name": "INGLÉS 1º/2º",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "INGLÉS",
+    "school": true,
+    "cursos": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": "ingles-3-4",
+    "name": "INGLÉS 3º/4º",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "INGLÉS",
+    "school": true,
+    "cursos": [
+      3,
+      4
+    ]
+  },
+  {
+    "id": "inspirarte-infantil",
+    "name": "INSPIRARTE INFANTIL",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "ARTS",
+    "school": true,
+    "cursos": [
+      "INF"
+    ]
+  },
+  {
+    "id": "inspirarte-primaria",
+    "name": "INSPIRARTE PRIMARIA",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "ARTS",
+    "school": true,
+    "cursos": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "inspirarte-jueves",
+    "name": "INSPIRARTE",
+    "days": [
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "ARTS",
+    "school": true,
+    "cursos": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "ajedrez",
+    "name": "AJEDREZ",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "MATEMÁTICAS",
+    "school": true
+  },
+  {
+    "id": "piano-mj",
+    "name": "PIANO",
+    "days": [
+      "M",
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "MÚSICA",
+    "school": true
+  },
+  {
+    "id": "ofimatica",
+    "name": "OFIMÁTICA",
+    "days": [
+      "M"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "MATEMÁTICAS",
+    "school": true
+  },
+  {
+    "id": "ajedrez-jueves",
+    "name": "AJEDREZ JUEVES",
+    "days": [
+      "J"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Viena",
+    "category": "MATEMÁTICAS",
+    "school": true
+  },
+  {
+    "id": "teatro-musical-primaria",
+    "name": "TEATRO MUSICAL",
+    "days": [
+      "V"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "MÚSICA",
+    "school": true,
+    "cursos": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "teatro-infantil",
+    "name": "TEATRO INFANTIL",
+    "days": [
+      "V"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "MÚSICA",
+    "school": true,
+    "cursos": [
+      "INF"
+    ]
+  },
+  {
+    "id": "robotica",
+    "name": "ROBÓTICA",
+    "days": [
+      "V"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "MATEMÁTICAS",
+    "school": true,
+    "cursos": [
+      "INF",
+      1,
+      2
+    ]
+  },
+  {
+    "id": "disena-la-moda",
+    "name": "DISEÑA LA MODA",
+    "days": [
+      "V"
+    ],
+    "start": "16:00",
+    "end": "17:00",
+    "address": "C/ Londres",
+    "category": "ARTS",
+    "school": true
+  },
+  {
+    "id": "judo",
+    "name": "JUDO",
+    "days": [
+      "L",
+      "X"
+    ],
+    "start": "16:00",
+    "end": "17:15",
+    "address": "C/ Viena",
+    "category": "EDUCACIÓN FÍSICA",
+    "school": true
+  },
+  {
+    "id": "ok-english",
+    "name": "OK ENGLISH",
+    "days": [
+      "M"
+    ],
+    "start": "18:30",
+    "end": "19:30",
+    "address": "Calle Francisco Ribera 1",
+    "category": "INGLÉS",
+    "school": false
+  },
+  {
+    "id": "academia-machado",
+    "name": "ACADEMIA MACHADO",
+    "days": [
+      "J"
+    ],
+    "start": "17:00",
+    "end": "18:00",
+    "address": "Calle Pablo Freire 6",
+    "category": "ARTS",
+    "school": false
+  },
+  {
+    "id": "zumba-alcorcon",
+    "name": "ZUMBA",
+    "days": [
+      "V"
+    ],
+    "start": "18:00",
+    "end": "19:00",
+    "address": "Alcorcón",
+    "category": "EDUCACIÓN FÍSICA",
+    "school": false
+  }
+]

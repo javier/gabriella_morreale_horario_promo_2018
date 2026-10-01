@@ -1,0 +1,82 @@
+{
+  "clase": "3ºB",
+  "curso": 3,
+  "rows": [
+    {
+      "time": "09:00 - 09:45",
+      "cells": [
+        "SOCIAL SCIENCE",
+        "LENGUA",
+        "NATURAL SCIENCE",
+        "SOCIAL SCIENCE",
+        "INGLÉS"
+      ]
+    },
+    {
+      "time": "09:45 - 10:30",
+      "cells": [
+        "LENGUA",
+        "MAE",
+        "INGLÉS",
+        "INGLÉS",
+        "MATEMÁTICAS"
+      ]
+    },
+    {
+      "time": "10:30 - 11:15",
+      "cells": [
+        "MAE",
+        "EDUCACIÓN FÍSICA",
+        "MÚSICA",
+        "ARTS",
+        "NATURAL SCIENCE"
+      ]
+    },
+    {
+      "time": "11:15 - 11:45",
+      "type": "recreo",
+      "snacks": [
+        "Fruta/Verdura",
+        "Bocadillo/Sandwich",
+        "Fruta/Verdura",
+        "Bocadillo/Sandwich",
+        "Cereales/Lácteos"
+      ]
+    },
+    {
+      "time": "11:45 - 12:30",
+      "cells": [
+        "INGLÉS",
+        "INGLÉS",
+        "MATEMÁTICAS",
+        "LENGUA",
+        "LENGUA"
+      ]
+    },
+    {
+      "time": "12:30 - 13:15",
+      "cells": [
+        "MATEMÁTICAS",
+        "ARTS",
+        "LENGUA",
+        "MATEMÁTICAS",
+        "LENGUA"
+      ]
+    },
+    {
+      "time": "13:15 - 14:00",
+      "cells": [
+        "EDUCACIÓN FÍSICA",
+        "MATEMÁTICAS",
+        "LENGUA",
+        "MATEMÁTICAS",
+        "EDUCACIÓN FÍSICA"
+      ]
+    },
+    {
+      "time": "14:00 - 16:00",
+      "type": "comedor",
+      "label": "COMEDOR / PATIO"
+    }
+  ]
+}

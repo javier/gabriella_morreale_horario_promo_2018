@@ -1,0 +1,19 @@
+{
+  "periods": [
+    {
+      "title": "Recogidas sin extraescolar (octubre a mayo)",
+      "turno": "2.º turno",
+      "comedor": "15:50-16:00",
+      "salida": "C/ Viena",
+      "lluvia": "puertas del hall de C/ Viena",
+      "calor": "en clase, salida por C/ Viena"
+    },
+    {
+      "title": "Septiembre y junio",
+      "comedor": "14:50-15:00",
+      "salida": "C/ Viena",
+      "ampliado": "acceso libre por C/ Londres de 15:15 a 16:00, recogida en la puerta principal del gimnasio (también con lluvia)",
+      "calor": "3.º espera en su clase; entrar por la puerta exterior del comedor y seguir el pasillo de primaria hasta el final"
+    }
+  ]
+}

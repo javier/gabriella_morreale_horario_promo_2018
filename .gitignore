@@ -1,0 +1,5 @@
+# Teacher full names, kept only locally (GDPR)
+data/*/teachers.full.json
+
+# Personal links, kept only locally
+my_links.md

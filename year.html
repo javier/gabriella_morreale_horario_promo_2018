@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horario</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bar">
+  <a class="btn" href="index.html" id="back">Todos los cursos</a>
+  <span class="spacer"></span>
+  <span class="status" id="status" aria-live="polite"></span>
+  <button id="pick">Seleccionar extraescolares</button>
+  <button id="copy">Copiar enlace</button>
+  <button class="primary" onclick="window.print()">Imprimir o guardar PDF</button>
+</div>
+<main class="page">
+  <h1 id="title"></h1>
+  <div class="scroll"><div class="tt" id="tt"></div></div>
+  <div class="notes" id="notes"></div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <div class="dlg-head">
+    <h2 id="dlg-title">Extraescolares</h2>
+    <button id="clear">Quitar todas</button>
+  </div>
+  <div class="dlg-body" id="list"></div>
+  <div class="dlg-foot"><button class="primary" id="done">Listo</button></div>
+</dialog>
+
+<script src="common.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const yearId = params.get('y');
+let D = {};            // loaded data
+let selected = [];     // selected activity ids, in order
+
+function daysLabel(days) { return days.join('-'); }
+function daysLong(days) {
+  const n = days.map(d => DAY_NAMES[DAYS.indexOf(d)].toLowerCase());
+  const s = n.length > 1 ? n.slice(0, -1).join(', ') + ' y ' + n[n.length - 1] : n[0];
+  return s[0].toUpperCase() + s.slice(1);
+}
+
+function overlaps(a, b) {
+  if (!a.days.some(d => b.days.includes(d))) return false;
+  return toMin(a.start) < toMin(b.end) && toMin(b.start) < toMin(a.end);
+}
+
+function available() {
+  const curso = D.tt.curso;
+  return D.acts.filter(a => !a.cursos || a.cursos.includes(curso));
+}
+
+function byId(id) { return D.acts.find(a => a.id === id); }
+
+function conflictFor(act) {
+  for (const id of selected) {
+    if (id === act.id) continue;
+    const other = byId(id);
+    if (other && overlaps(act, other)) return other;
+  }
+  return null;
+}
+
+function syncURL() {
+  const p = new URLSearchParams(location.search);
+  if (selected.length) p.set('acts', selected.join(',')); else p.delete('acts');
+  history.replaceState(null, '', location.pathname + '?' + p.toString().replace(/%2C/g, ','));
+  document.getElementById('back').href = 'index.html' + (selected.length ? '?acts=' + selected.join(',') : '');
+  const n = selected.length;
+  document.getElementById('pick').textContent =
+    n ? `Seleccionar extraescolares (${n})` : 'Seleccionar extraescolares';
+}
+
+function colourOf(key) { return D.colours[key] || '#ffffff'; }
+
+function render() {
+  const tt = document.getElementById('tt');
+  tt.replaceChildren();
+  const put = (node, row, col, rowSpan = 1) => {
+    node.style.gridRow = `${row} / span ${rowSpan}`;
+    node.style.gridColumn = `${col}`;
+    tt.appendChild(node);
+    return node;
+  };
+
+  put(el('div', 'h corner'), 1, 1);
+  DAY_NAMES.forEach((d, i) => put(el('div', 'h', d), 1, i + 2));
+
+  let r = 2;
+  const rowTemplate = ['auto'];
+  for (const row of D.tt.rows) {
+    rowTemplate.push('auto');
+    put(el('div', 't', row.time), r, 1);
+    for (let i = 0; i < 5; i++) {
+      const c = el('div');
+      if (row.type === 'recreo') {
+        c.style.background = colourOf('RECREO');
+        c.append(el('b', null, 'RECREO'), row.snacks[i]);
+      } else if (row.type === 'comedor') {
+        c.style.background = colourOf('COMEDOR');
+        c.append(el('b', null, row.label));
+        const p = D.pickup.periods[0];   // first period = the usual pickup
+        if (p) c.append([p.comedor, p.salida].filter(Boolean).join(' · '));
+      } else {
+        const label = row.cells[i];
+        const key = subjectKey(label);
+        c.style.background = colourOf(key);
+        c.append(el('b', null, label));
+        if (D.teachers[key]) c.append(D.teachers[key]);
+      }
+      put(c, r, i + 2);
+    }
+    r++;
+  }
+
+  // Afternoon: hourly slots from 16:00, built from 15-minute rows
+  const acts = selected.map(byId).filter(Boolean);
+  if (acts.length) {
+    const startH = 16;
+    const endH = Math.max(17, ...acts.map(a => Math.ceil(toMin(a.end) / 60)));
+    const base = r, q = (t) => (toMin(t) - startH * 60) / 15;
+    for (let h = startH; h < endH; h++) {
+      const row = base + (h - startH) * 4;
+      for (let k = 0; k < 4; k++) rowTemplate.push('var(--q)');
+      put(el('div', 't', `${h}:00 - ${h + 1}:00`), row, 1, 4);
+      for (let i = 0; i < 5; i++) put(el('div', 'empty'), row, i + 2, 4);
+    }
+    for (const a of acts) {
+      for (const d of a.days) {
+        const c = el('div', 'act');
+        c.style.background = colourOf(a.category);
+        c.append(el('b', null, a.name), `(${a.start}-${a.end})`, el('br'),
+                 (a.school ? 'Salida ' : '') + a.address);
+        put(c, base + q(a.start), DAYS.indexOf(d) + 2, q(a.end) - q(a.start));
+      }
+    }
+  }
+  tt.style.gridTemplateRows = rowTemplate.join(' ');
+
+  const notes = document.getElementById('notes');
+  notes.replaceChildren(...D.pickup.periods.map(pickupNote));
+}
+
+// Turn one pickup period into a sentence-style note
+function pickupNote(p) {
+  const cap = s => s[0].toUpperCase() + s.slice(1);
+  const parts = [];
+  if (p.comedor) parts.push(`Comedor, ${p.turno ? p.turno + ', ' : ''}${p.comedor}${p.salida ? ' por ' + p.salida : ''}.`);
+  else if (p.salida) parts.push(`Salida por ${p.salida}.`);
+  if (p.ampliado) parts.push(`Horario ampliado: ${p.ampliado}.`);
+  if (p.lluvia) parts.push(`Días de lluvia: ${p.lluvia}.`);
+  if (p.calor) parts.push(`Altas temperaturas: ${p.calor}.`);
+  const el_ = el('p');
+  el_.append(el('strong', null, p.title + ': '), parts.join(' '));
+  return el_;
+}
+
+function renderList() {
+  const list = document.getElementById('list');
+  list.replaceChildren();
+  const groups = new Map();
+  for (const a of available()) {
+    const k = daysLong(a.days);
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k).push(a);
+  }
+  for (const [k, items] of groups) {
+    const g = el('div', 'group');
+    g.append(el('h3', null, k));
+    for (const a of items) {
+      const on = selected.includes(a.id);
+      const clash = on ? null : conflictFor(a);
+      const lab = el('label', 'opt' + (clash ? ' off' : ''));
+      const cb = el('input');
+      cb.type = 'checkbox'; cb.checked = on; cb.disabled = !!clash;
+      cb.addEventListener('change', () => {
+        selected = cb.checked ? [...selected, a.id] : selected.filter(x => x !== a.id);
+        syncURL(); render(); renderList();
+      });
+      const sw = el('span', 'sw'); sw.style.background = colourOf(a.category);
+      const txt = el('span');
+      txt.append(el('strong', null, a.name), el('br'),
+        el('span', 'meta', `${daysLabel(a.days)}, ${a.start}-${a.end}, ${(a.school ? 'salida ' : '') + a.address}`));
+      if (clash) { txt.append(el('br'), el('span', 'why', `Coincide con ${clash.name}`)); }
+      lab.append(cb, sw, txt);
+      g.append(lab);
+    }
+    list.append(g);
+  }
+}
+
+async function main() {
+  try {
+    if (!yearId || !/^\d{4}-\d{4}$/.test(yearId)) throw new Error('Falta el curso en el enlace (por ejemplo ?y=2026-2027).');
+    const [tt, teachers, acts, colours, pickup] = await Promise.all([
+      loadJSON(`data/${yearId}/timetable.json`),
+      loadJSON(`data/${yearId}/teachers.json`),
+      loadJSON(`data/${yearId}/activities.json`),
+      loadJSON('data/subjects.json'),
+      loadJSON(`data/${yearId}/pickup.json`).catch(() => ({ periods: [] })),
+    ]);
+    D = { tt, teachers, acts, colours, pickup };
+    const title = `Horario ${tt.clase} (${yearId})`;
+    document.title = title;
+    document.getElementById('title').textContent = title;
+
+    // Restore selection from the URL, skipping unknown ids and anything that clashes
+    const wanted = (params.get('acts') || '').split(',').map(s => s.trim()).filter(Boolean);
+    const skipped = [];
+    for (const id of wanted) {
+      const a = byId(id);
+      if (!a || selected.includes(id)) { if (!a) skipped.push(id); continue; }
+      if (conflictFor(a)) { skipped.push(id); continue; }
+      selected.push(id);
+    }
+    if (skipped.length) document.getElementById('status').textContent =
+      `No se han añadido: ${skipped.join(', ')}`;
+    syncURL(); render();
+  } catch (e) {
+    document.querySelector('main').replaceChildren(el('p', 'err', e.message));
+  }
+}
+
+const dlg = document.getElementById('dlg');
+document.getElementById('pick').onclick = () => { renderList(); dlg.showModal(); };
+document.getElementById('done').onclick = () => dlg.close();
+document.getElementById('clear').onclick = () => { selected = []; syncURL(); render(); renderList(); };
+document.getElementById('copy').onclick = async () => {
+  const s = document.getElementById('status');
+  try { await navigator.clipboard.writeText(location.href); s.textContent = 'Enlace copiado'; }
+  catch { s.textContent = 'Copia el enlace de la barra de direcciones'; }
+};
+main();
+</script>
+</body>
+</html>

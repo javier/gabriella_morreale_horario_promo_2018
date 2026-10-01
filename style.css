@@ -1,0 +1,105 @@
+:root {
+  --ink: #1d2433;
+  --muted: #5b6475;
+  --line: #c9ced8;
+  --hora: #FFF3E0;
+  --head: #C8E6C9;
+  --q: 0.95rem;           /* height of a 15-minute afternoon row */
+  font-family: Arial, "Liberation Sans", Helvetica, sans-serif;
+  color: var(--ink);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #fff; }
+a { color: inherit; }
+button, .btn {
+  font: inherit; font-size: 0.9rem; cursor: pointer;
+  padding: 0.45rem 0.8rem; border: 1px solid var(--ink); border-radius: 4px;
+  background: #fff; color: var(--ink); text-decoration: none; display: inline-block;
+}
+button.primary { background: var(--ink); color: #fff; }
+button:focus-visible, .btn:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid #4a7bd0; outline-offset: 2px;
+}
+
+/* ---------- index ---------- */
+.home { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+.home h1 { font-size: 2.6rem; margin: 0; letter-spacing: -0.02em; }
+.home .sub { color: var(--muted); margin: 0.3rem 0 2.5rem; }
+.years { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.year-link {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1.5rem;
+  padding: 1.1rem 1.25rem; border: 1px solid var(--line); border-radius: 6px; text-decoration: none;
+}
+.year-link:hover { border-color: var(--ink); }
+.year-link .y { font-size: 1.6rem; font-weight: bold; }
+.year-link .c { color: var(--muted); margin-top: 0.15rem; }
+.thumb { display: grid; grid-template-columns: repeat(5, 1.4rem); gap: 2px; }
+.thumb span { height: 0.6rem; border-radius: 1px; }
+
+/* ---------- year page ---------- */
+.bar {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+  padding: 0.8rem 1rem; border-bottom: 1px solid var(--line);
+}
+.bar .spacer { flex: 1; }
+.status { color: var(--muted); font-size: 0.85rem; }
+.page { padding: 1rem; max-width: 72rem; margin: 0 auto; }
+.page h1 {
+  font-size: 1.5rem; font-weight: normal; color: #1f3864; margin: 0 0 0.6rem;
+  padding-bottom: 0.3rem; border-bottom: 1px solid #4472c4;
+}
+.tt {
+  display: grid; grid-template-columns: 7.5rem repeat(5, minmax(0, 1fr));
+  font-size: 0.78rem; line-height: 1.3; border: 1px solid var(--line);
+}
+.tt > div { padding: 0.25rem 0.4rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.tt .h { background: var(--head); font-weight: bold; font-size: 0.9rem; }
+.tt .t { background: var(--hora); font-weight: bold; font-size: 0.85rem; white-space: nowrap; }
+.tt .corner { background: #fff; }
+.tt b { display: block; font-size: 0.74rem; }
+.tt .empty { background: #fff; }
+.tt .act { position: relative; z-index: 1; overflow: hidden; border-bottom: 1px solid var(--line); }
+.notes { font-size: 0.82rem; margin-top: 0.7rem; line-height: 1.4; }
+.notes p { margin: 0 0 0.3rem; }
+
+/* ---------- picker ---------- */
+dialog { border: 1px solid var(--ink); border-radius: 6px; padding: 0; width: min(40rem, 94vw); max-height: 88vh; }
+dialog::backdrop { background: rgba(29, 36, 51, 0.35); }
+.dlg-head, .dlg-foot { padding: 0.9rem 1.1rem; display: flex; gap: 0.6rem; align-items: center; }
+.dlg-head { border-bottom: 1px solid var(--line); }
+.dlg-head h2 { margin: 0; font-size: 1.1rem; flex: 1; }
+.dlg-foot { border-top: 1px solid var(--line); justify-content: flex-end; }
+.dlg-body { padding: 0.4rem 1.1rem; overflow: auto; max-height: 64vh; }
+.group h3 { font-size: 0.85rem; color: var(--muted); margin: 1rem 0 0.3rem; font-weight: normal; }
+.opt {
+  display: grid; grid-template-columns: auto 0.6rem 1fr; gap: 0.6rem; align-items: start;
+  padding: 0.45rem 0.3rem; border-radius: 4px; cursor: pointer;
+}
+.opt:hover { background: #f3f5f8; }
+.opt .sw { width: 0.6rem; height: 1.1rem; border-radius: 2px; margin-top: 0.1rem; }
+.opt .meta { color: var(--muted); font-size: 0.82rem; }
+.opt .why { color: #a33; font-size: 0.82rem; }
+.opt.off { cursor: not-allowed; opacity: 0.55; }
+.opt.off:hover { background: none; }
+
+.err { color: #a33; padding: 2rem 1rem; }
+
+/* small screens: keep the timetable readable and let it scroll sideways */
+.scroll { overflow-x: auto; }
+@media (max-width: 760px) {
+  .tt { min-width: 46rem; }
+  .page { padding: 0.5rem; }
+}
+
+@page { size: A4 landscape; margin: 9mm; }
+@media print {
+  .bar, dialog { display: none !important; }
+  .page { padding: 0; max-width: none; }
+  :root { --q: 3.8mm; }
+  .tt { font-size: 9pt; }
+  .tt b { font-size: 8.5pt; }
+  .tt .h { font-size: 10pt; }
+  .tt .t { font-size: 9.5pt; }
+  .notes { font-size: 10pt; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
