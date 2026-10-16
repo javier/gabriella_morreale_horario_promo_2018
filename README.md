@@ -66,6 +66,7 @@ se convierte en una nota debajo del horario.
 - `days`: cualquiera de `L M X J V`.
 - `category`: una asignatura de `subjects.json`; la actividad toma ese color.
 - `school: true` muestra la dirección como "Salida C/ ..."; `false` muestra la dirección tal cual está escrita.
+- `teacher` (opcional): quién da la actividad, solo el nombre de pila (o el club). Aparece junto al horario.
 - `cursos` (opcional): niveles que pueden elegirla, de `1` a `6` o `"INF"`. Si se omite, está disponible para todos.
 - `id` es lo que va en la URL, así que no cambies ids que ya estén en enlaces compartidos.
 

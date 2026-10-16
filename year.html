@@ -134,7 +134,7 @@ function render() {
       for (const d of a.days) {
         const c = el('div', 'act');
         c.style.background = colourOf(a.category);
-        c.append(el('b', null, a.name), `(${a.start}-${a.end})`, el('br'),
+        c.append(el('b', null, a.name), `(${a.start}-${a.end})` + (a.teacher ? ` · ${a.teacher}` : ''), el('br'),
                  (a.school ? 'Salida ' : '') + a.address);
         put(c, base + q(a.start), DAYS.indexOf(d) + 2, q(a.end) - q(a.start));
       }
@@ -185,7 +185,8 @@ function renderList() {
       const sw = el('span', 'sw'); sw.style.background = colourOf(a.category);
       const txt = el('span');
       txt.append(el('strong', null, a.name), el('br'),
-        el('span', 'meta', `${daysLabel(a.days)}, ${a.start}-${a.end}, ${(a.school ? 'salida ' : '') + a.address}`));
+        el('span', 'meta', `${daysLabel(a.days)}, ${a.start}-${a.end}, ${(a.school ? 'salida ' : '') + a.address}` +
+          (a.teacher ? `, con ${a.teacher}` : '')));
       if (clash) { txt.append(el('br'), el('span', 'why', `Coincide con ${clash.name}`)); }
       lab.append(cb, sw, txt);
       g.append(lab);
